@@ -9,13 +9,6 @@ def homeView(request):
     return render(request, "farmers/home.html", context)
 
 
-def welcomeView(request):
-    context = {
-
-    }
-    return render(request, "farmers/welcome.html", context)
-
-
 def suppliers_category(request):
     context = {
 
@@ -49,3 +42,10 @@ def productAddView(request):
 
     }
     return render(request, "farmers/product_add.html", context)
+
+
+def dealersDetailsView(request):
+    context = {
+
+    }
+    return render(request, "farmers/dealerDetails.html", context)

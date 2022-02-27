@@ -1,0 +1,28 @@
+{%extends 'accounts/main.html'%} {%load crispy_forms_tags%} {%block title%} Sign
+in {%endblock%} {%block current%} Login {%endblock%} {%block message%} Welcome
+Back, {%endblock%} {%block content%}
+<div class="container">
+  <div class="mt-3" align="center">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="text-left">
+          <div class="card-body">
+            <legend>Dealer Signup</legend>
+            <hr class="bg-success" />
+            <form method="POST" action="" enctype="multipart/form-data">
+              <button class="btn btn-outline-success btn-md col-sm-3">
+                Register</button
+              ><br />
+              <a href=""
+                ><small class="text-muted p-1"
+                  >Already have an Account?</small
+                ></a
+              >
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
