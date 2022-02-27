@@ -58,6 +58,8 @@ class User(AbstractBaseUser, TrackingModel):
     username_validator = UnicodeUsernameValidator()
     role_choice = (
         ("Administrator", "Administrator"),
+        ("Customer", "Customer"),
+        ("Dealer", "Dealer"),
     )
     username = models.CharField(
         _('username'),
@@ -127,7 +129,18 @@ class Profile(models.Model):
 
 
 class Administrator(Profile):
-    pass
+    job_id = models.CharField(max_length=14, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
+
+
+class Customer(Profile):
+    pass
+
+    def __str__(self):
+        return str(self.user.username)
+
+    class Meta:
+        verbose_name_plural = "Customers"
+        ordering = ["-id"]

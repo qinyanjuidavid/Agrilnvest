@@ -1,0 +1,124 @@
+{%extends 'accounts/base.html'%} {%load crispy_forms_tags%} {%load static%}
+{%load humanize%} {%block title%} {%endblock%} {%block category%}
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="category-wrap" style="border-radius: 35px">
+          <div
+            class="card-header"
+            style="background-color: forestgreen; color: white"
+          >
+            <a class="text-white">BROWSE BY <b>CATEGORY</b></a>
+            <a href="" class="fa fa-list text-white float-right"></a>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-md-2">
+              <div class="top-category text-center no-border-left">
+                <a href=""
+                  ><h3></h3>
+                  <!-- <span class="icon flaticon-contact"></span> -->
+                  <i
+                    class="fa fa-spinne fa-pulse fa-3x"
+                    style="color: #ff8b00"
+                  ></i>
+                  <p><span class="number"></span> <span>Suppliers</span></p></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%endblock%} {%block content%}
+<div class="row">
+  <div class="col-sm-12 ftco-animate">
+    <div
+      class="job-post-item p-4 d-block d-lg-flex align-items-center"
+      align="center"
+    >
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="img">
+              <img
+                class="rounded-circle"
+                src=""
+                height="200px"
+                width="200px"
+                alt="edit"
+              />
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="text pl-md-4 text-left">
+              <span class="location mb-0 text-dark"
+                ><span class="icon-my_location"></span>
+              </span>
+              <h2>
+                <i class="fa fa-user fa-sm text-muted"></i>
+              </h2>
+              <span class="position"
+                ><i class="fa fa-tag fa-rotate-90"></i>
+              </span>
+              <p class="mb-2 text-dark"></p>
+              <span class="seen text-dark"
+                ><i class="fa fa-clock-o"></i> Joined ago</span
+              >
+              <p>
+                <a href="" class="btn mt-2" style="border-color: forestgreen"
+                  >View Supplier</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%} {%block side%}
+
+<div class="sidebar-box bg-white p-4 ftco-animate">
+  <h3 class="heading-sidebar">Browse By Category</h3>
+  <form action="#" class="search-form mb-3">
+    <div class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" class="form-control" placeholder="Search..." />
+    </div>
+  </form>
+  <form method="get" action="" class="browse-form">
+    <button class="btn btn-outline-primary btn-sm">Filter</button>
+  </form>
+</div>
+
+<div class="sidebar-box bg-white p-4 ftco-animate">
+  <h3 class="heading-sidebar">Browse By Location</h3>
+  <form action="#" class="search-form mb-3">
+    <div class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" class="form-control" placeholder="Search..." />
+    </div>
+  </form>
+  <form method="get" action="" class="browse-form">
+    <button class="btn btn-outline-primary btn-sm">Filter</button>
+  </form>
+</div>
+
+<div class="sidebar-box bg-white p-4 ftco-animate">
+  <h3 class="heading-sidebar">Browse By Response Time</h3>
+  <form action="#" class="search-form mb-3">
+    <div class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" class="form-control" placeholder="Search..." />
+    </div>
+  </form>
+  <form method="get" action="" class="browse-form">
+    <button class="btn btn-outline-primary btn-sm">Filter</button>
+  </form>
+</div>
+
+{%endblock%}
