@@ -1,27 +1,58 @@
-{%extends 'accounts/main.html'%} {%load crispy_forms_tags%} {%block title%} Sign
-in {%endblock%} {%block current%} Login {%endblock%} {%block message%} Welcome
-Back, {%endblock%} {%block content%}
-<div class="container">
-  <div class="mt-3" align="center">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="text-left">
-          <div class="card-body">
-            <legend>Login</legend>
-            <hr class="bg-success" />
-            <form method="POST" action="" enctype="multipart/form-data">
-              {% csrf_token %} {{form|crispy}}
-              <button class="btn btn-outline-success btn-md col-sm-3">
-                Login</button
-              ><br />
-              <a href=""
-                ><small class="text-muted p-1">Forgot Password?</small></a
-              >
-            </form>
-          </div>
+{%extends 'accounts/main.html'%} {%load static%}{%load crispy_forms_tags%}
+<!---->
+{% load widget_tweaks %} {%block title%} Sign in {%endblock%} {%block current%}
+Login {%endblock%} {%block message%} Welcome Back, {%endblock%}
+<!---->
+{%block content%}
+
+<link
+  href="{%static 'css/login.css'%}"
+  rel="stylesheet"
+  type="text/css"
+  media="all"
+/>
+<div class="signupform">
+  <div class="container">
+    <div class="agile_info">
+      <div class="w3l_form">
+        <div class="left_grid_info">
+          <h1 class="pt-1">Manage Your Raki Account</h1>
+          <p "margin: 0; padding: 0;">Growing for a better tommorow</p>
+
+          <img src="{%static 'images/login.svg'%}" alt="" />
         </div>
+      </div>
+      <div class="w3_info">
+        <h2>Login to your Account</h2>
+        <p style="margin: 0; padding-bottom: 1">
+          Enter your details to continue,
+        </p>
+        <form action="#" method="post" class="">
+          {%csrf_token%}
+          <!---->
+          {% for field in form.visible_fields %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field|add_class:'form-control' }} {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
+          </div>
+          {% endfor %}
+          <button
+            class="btn btn-lg text-white col-sm-4 mt-4"
+            style="background-color: #206dfb"
+            type="submit"
+          >
+            Login</button
+          ><br />
+        </form>
+        <br />
+        <a href="/AgrinVest/password_reset/" class="text-muted ml-1"
+          >Forgot Password?</a
+        >
       </div>
     </div>
   </div>
 </div>
+
 {%endblock%}

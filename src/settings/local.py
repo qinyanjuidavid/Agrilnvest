@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     'phonenumber_field',
     'crispy_forms',
+    'widget_tweaks',
 ]
 PHONENUMBER_DB_FORMAT = "NATIONAL"
 PHONENUMBER_DEFAULT_REGION = "KE"
