@@ -3,7 +3,7 @@ from django.db.models.signals import (
     post_migrate)
 from django.dispatch import receiver
 from accounts.models import (
-    User, Administrator,
+    User, Administrator, Dealer, Customer
 )
 
 
@@ -13,3 +13,10 @@ def create_users(sender, instance, created, *args, **kwargs):
         if (instance.role == "Administrator" or
                 instance.is_admin or instance.is_staff):
             Administrator.objects.update_or_create(user=instance)
+        elif (instance.role == "Dealer"):
+            Dealer.objects.update_or_create(user=instance)
+
+        elif (instance.role == "Customer"):
+            Customer.objects.update_or_create(
+                user=instance
+            )

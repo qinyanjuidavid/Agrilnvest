@@ -144,3 +144,12 @@ class Customer(Profile):
     class Meta:
         verbose_name_plural = "Customers"
         ordering = ["-id"]
+
+
+class Dealer(Profile):
+    county = models.CharField(max_length=100, blank=True, null=True)
+    town = models.CharField(max_length=100, blank=True, null=True)
+    estate = models.CharField(max_length=106, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.user.username)

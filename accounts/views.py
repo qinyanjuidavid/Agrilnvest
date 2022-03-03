@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView
 from accounts.models import User
+from accounts.decorators import (
+    administrator_required, customer_required,
+    dealer_required)
 
 
 def dealers_profile_view(request):
