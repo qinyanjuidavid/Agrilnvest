@@ -3,53 +3,52 @@
 {% load widget_tweaks %} {%block title%} Sign in {%endblock%} {%block current%}
 Login {%endblock%} {%block message%} Welcome Back, {%endblock%}
 <!---->
-{%block content%}
-
+{%block content%} {% comment %}
 <link
   href="{%static 'css/login.css'%}"
   rel="stylesheet"
   type="text/css"
   media="all"
 />
-<div class="signupform">
-  <div class="container shadow-lg">
-    <div class="agile_info">
-      <div class="w3l_form">
-        <div class="left_grid_info">
-          <h1 class="">Manage Your Raky Account</h1>
-          <p "margin: 0; padding: 0;">Growing for a better tommorow,</p>
-
-          <img src="{%static 'images/login.svg'%}" alt="" />
-        </div>
-      </div>
-      <div class="w3_info">
-        <h2>Login to your Account</h2>
-        <p style="margin: 0; padding-bottom: 1">
-          Enter your details to continue,
-        </p>
-        <form action="#" method="post" class="">
-          {%csrf_token%}
-          <!---->
-          {% for field in form.visible_fields %}
-          <div class="form-group">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field|add_class:'form-control' }} {% for error in field.errors %}
-            <span class="help-block">{{ error }}</span>
+{% endcomment %}
+<div class="container mt-3 margin-auto" style="margin: auto">
+  <div class="row text-left">
+    <div class="col-sm-7 ftco-animate">
+      <div class="job-post-item p-4 d-block d-lg-flex" align="center">
+        <div class="col-sm-12">
+          <h3 class="text-left">Welcome back,</h3>
+          <p class="text-left" style="margin: 0; padding-bottom: 1">
+            Enter your login details to continue.
+          </p>
+          <hr />
+          <form action="#" method="post" class="text-left">
+            {%csrf_token%}
+            <!---->
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field|add_class:'form-control' }}
+              <!---->
+              {% for error in field.errors %}
+              <span class="help-block">{{ error }}</span>
+              {% endfor %}
+            </div>
             {% endfor %}
-          </div>
-          {% endfor %}
-          <button
-            class="btn btn-lg text-white col-sm-4 mt-4"
-            style="background-color: #206dfb"
-            type="submit"
-          >
-            Login</button
-          ><br />
-        </form>
-        <br />
-        <a href="{%url 'accounts:password_reset'%}" class="text-muted ml-1"
-          >Forgot Password?</a
-        >
+            <button
+              class="btn btn-lg text-white col-sm-4 mt-4"
+              style="background-color: #206dfb"
+              type="submit"
+            >
+              Login
+            </button>
+            <br />
+          </form>
+          <p class="text-left mt-3">
+            <a href="{%url 'accounts:password_reset'%}" class="text-left ml-1"
+              >Forgot Password?</a
+            >
+          </p>
+        </div>
       </div>
     </div>
   </div>

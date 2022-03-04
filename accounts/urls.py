@@ -2,7 +2,9 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from accounts import views
-from accounts.views import dealerSignupView
+from accounts.views import (
+    dealerSignupView, adminSignupView,
+    customerSignupView)
 
 app_name = "accounts"
 urlpatterns = [
@@ -10,7 +12,11 @@ urlpatterns = [
         template_name="accounts/login.html"), name="login"),
     path('logout/', auth_views.LogoutView.as_view(
         template_name="accounts/logout.html"), name="logout"),
-    path("signup/", dealerSignupView, name="dealerSignup"),
+    path("signup/", dealerSignupView.as_view(), name="dealerSignup"),
+    path("customer/signup/", customerSignupView.as_view(),
+         name="customerSignup"),
+    path("administrator/signup/", adminSignupView.as_view(),
+         name="adminSignup"),
     # Password Reset
     path('password_reset/',
          auth_views.PasswordResetView.as_view(

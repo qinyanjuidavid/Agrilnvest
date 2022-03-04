@@ -1,13 +1,18 @@
-{%extends 'accounts/main.html'%}{% load widget_tweaks %}
+{%extends 'accounts/main.html'%} {%load static%}{%load crispy_forms_tags%}
 <!---->
-{%load crispy_forms_tags%} {%load static%} {%block title%} Password Reset!
-{%endblock%} {%block content%}
-<div class="container mt-3" align="center">
-  <div class="row">
-    <div class="col-sm-8 ftco-animate">
+{% load widget_tweaks %} {%block title%} Sign in {%endblock%} {%block current%}
+Login {%endblock%} {%block message%} Welcome Back, {%endblock%}
+<!---->
+{%block content%}
+<div class="container mt-3 margin-auto" style="margin: auto">
+  <div class="row text-left">
+    <div class="col-sm-7 ftco-animate">
       <div class="job-post-item p-4 d-block d-lg-flex" align="center">
         <div class="col-sm-12">
-          <h3 class="text-left">Forgot Password?</h3>
+          <h3 class="text-left">Administrator Register,</h3>
+          <p class="text-left" style="margin: 0; padding-bottom: 1">
+            Description
+          </p>
           <hr />
           <form action="#" method="post" class="text-left">
             {%csrf_token%}
@@ -27,13 +32,19 @@
               style="background-color: #206dfb"
               type="submit"
             >
-              Password Reset
+              Register
             </button>
             <br />
           </form>
+          <p class="text-left mt-3">
+            <a href="{%url 'accounts:password_reset'%}" class="text-left ml-1"
+              >Forgot Password?</a
+            >
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 {%endblock%}
