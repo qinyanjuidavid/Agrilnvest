@@ -148,10 +148,6 @@ class Profile(models.Model):
     profile_picture = models.ImageField(
         _("profile picture"), upload_to="picture/%y/%m/%d",
         default="default.png")
-    county = models.ForeignKey(Counties, on_delete=models.DO_NOTHING,
-                               blank=True, null=True)
-    town = models.CharField(max_length=100, blank=True, null=True)
-    estate = models.CharField(max_length=106, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -215,6 +211,10 @@ class Dealer(Profile):
                                  on_delete=models.CASCADE,
                                  blank=True,
                                  null=True)
+    county = models.ForeignKey(Counties, on_delete=models.DO_NOTHING,
+                               blank=True, null=True)
+    town = models.CharField(max_length=100, blank=True, null=True)
+    estate = models.CharField(max_length=106, blank=True, null=True)
 
     def __str__(self):
         return str(self.user.username)

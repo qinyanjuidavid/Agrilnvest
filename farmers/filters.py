@@ -11,7 +11,9 @@ class OrderFilter(django_filters.FilterSet):
     response_timeQuery = ResponseTime.objects.all()
     category = django_filters.ModelMultipleChoiceFilter(
         queryset=query,
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={
+            "class": ""
+        }),
         label=""
     )
     county = django_filters.ModelMultipleChoiceFilter(
@@ -19,7 +21,7 @@ class OrderFilter(django_filters.FilterSet):
         widget=forms.CheckboxSelectMultiple,
         label=""
     )
-    response = county = django_filters.ModelMultipleChoiceFilter(
+    response = django_filters.ModelMultipleChoiceFilter(
         queryset=response_timeQuery,
         widget=forms.CheckboxSelectMultiple,
         label=""

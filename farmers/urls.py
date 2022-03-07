@@ -7,5 +7,9 @@ urlpatterns = [
     path("", views.homeView, name="home"),
     path("post/products/", views.productAddView, name="product_add"),
     path("dealers/detail/",
-         views.dealersDetailsView, name="dealersDetails")
+         views.dealersDetailsView, name="dealersDetails"),
+    path(
+        "category/<str:category>/",
+        views.CategoryFilterView, name="categoryFilter"
+    )
 ]

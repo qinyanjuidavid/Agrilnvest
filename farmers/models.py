@@ -6,6 +6,8 @@ from django.utils.translation import gettext as _
 
 class ProductCategory(models.Model):
     category = models.CharField(_("category"), max_length=89, unique=True)
+    crop_icon = models.ImageField(
+        upload_to="crops-icons/", blank=True, null=True)
 
     def __str__(self):
         return str(self.category)
