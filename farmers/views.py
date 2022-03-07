@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from accounts.models import Dealer, User
+from farmers.filters import OrderFilter
 
 
 def homeView(request):
+    dealerQs = Dealer.objects.all().order_by("?")
+    orderFilter = OrderFilter(request.GET, queryset=dealerQs)
     context = {
-
+        "filter": orderFilter
     }
     return render(request, "farmers/home.html", context)
 

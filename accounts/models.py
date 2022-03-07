@@ -1,9 +1,11 @@
+from urllib import response
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import validators
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext as _
+from farmers.models import ProductCategory
 
 
 class TrackingModel(models.Model):
@@ -17,7 +19,7 @@ class TrackingModel(models.Model):
 
 class CustomManager(BaseUserManager):
     def create_user(self, email, username, password=None,
-                    role="",
+                    role="Administrator",
                     is_active=True, is_admin=False,
                     is_staff=False):
         if email is None:
@@ -31,6 +33,7 @@ class CustomManager(BaseUserManager):
             username=username
         )
         user_obj.set_password(password)
+        user_obj.role = "Administrator"
         user_obj.is_active = is_active
         user_obj.is_admin = is_admin
         user_obj.is_staff = is_staff
@@ -41,6 +44,7 @@ class CustomManager(BaseUserManager):
     def create_staff(self, email, username, password=None):
         user = self.create_user(
             email, username, password=password,
+            role="Administrator",
             is_active=True, is_admin=False,
             is_staff=True
         )
@@ -49,7 +53,8 @@ class CustomManager(BaseUserManager):
     def create_superuser(self, email, username, password=None):
         user = self.create_user(
             email, username, password=password,
-            is_staff=True, is_admin=True, is_active=True
+            is_staff=True, is_admin=True, is_active=True,
+            role="Administrator",
         )
         return user
 
@@ -112,6 +117,30 @@ class User(AbstractBaseUser, TrackingModel):
         return self.active
 
 
+class Counties(models.Model):
+    county = models.CharField(_("county"), max_length=40, unique=True)
+
+    def __str__(self):
+        return self.county
+
+    class Meta:
+        verbose_name_plural = "Counties"
+        ordering = ["-id", ]
+
+
+class ResponseTime(models.Model):
+    response = models.CharField(_("response time"),
+                                max_length=15,
+                                unique=True
+                                )
+
+    def __str__(self):
+        return self.response
+
+    class Meta:
+        verbose_name_plural = "Response Time"
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE, unique=True)
@@ -119,6 +148,10 @@ class Profile(models.Model):
     profile_picture = models.ImageField(
         _("profile picture"), upload_to="picture/%y/%m/%d",
         default="default.png")
+    county = models.ForeignKey(Counties, on_delete=models.DO_NOTHING,
+                               blank=True, null=True)
+    town = models.CharField(max_length=100, blank=True, null=True)
+    estate = models.CharField(max_length=106, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -147,9 +180,41 @@ class Customer(Profile):
 
 
 class Dealer(Profile):
-    county = models.CharField(max_length=100, blank=True, null=True)
-    town = models.CharField(max_length=100, blank=True, null=True)
-    estate = models.CharField(max_length=106, blank=True, null=True)
+    derivery_choices = (
+        ("Free", "Free"),
+        ("Paid", "Paid")
+    )
+    delivery_level = (
+        ("Beginner", "Beginner"),
+        ("Ameture", "Ameture"),
+        ("Pro", "Pro")
+    )
+    response_time = (
+        ("2 hrs", "2 hrs"),
+        ("6 hrs", "6 hrs"),
+        ("1 day", "1 day"),
+        ("2+ days", "2+ days")
+    )
+    category = models.ForeignKey(
+        ProductCategory, related_name="categories",
+        on_delete=models.CASCADE, blank=True, null=True)
+    approve = models.BooleanField(_("approve"), default=True)
+    protect_email = models.BooleanField(_("protect email"),
+                                        default=True)
+    derivery = models.CharField(
+        _("derivery"), max_length=10,
+        choices=derivery_choices,
+        blank=True, null=True
+    )
+    level = models.CharField(
+        _("delivery level"), max_length=14,
+        choices=delivery_level,
+        blank=True, null=True
+    )
+    response = models.ForeignKey(ResponseTime,
+                                 on_delete=models.CASCADE,
+                                 blank=True,
+                                 null=True)
 
     def __str__(self):
         return str(self.user.username)

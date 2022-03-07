@@ -32,7 +32,7 @@ class UserSignUpForm(ModelForm):
     @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_active = False
+        user.is_active = True
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()

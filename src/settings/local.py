@@ -35,11 +35,12 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'widget_tweaks',
+    'django_filters',
 ]
 PHONENUMBER_DB_FORMAT = "NATIONAL"
 PHONENUMBER_DEFAULT_REGION = "KE"
 
-# AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
