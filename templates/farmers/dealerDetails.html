@@ -3,7 +3,7 @@
 {%load static%}
 {%load crispy_forms_tags%}
 {%block title%}
-Supplier Details
+Details
 {%endblock%}
 {%block current%}
 Supplier Details
@@ -18,7 +18,7 @@ Welcome To Jambo Farmers,
   <div class="col-md-12 p-3 bg-white mb-3">
     <div class="row">
       <div class="col-md-2">
-        <img src="" height=80px width=80px alt="">
+        <img src="{{dealer.profile_picture.url}}" height=80px width=80px alt="">
       </div>
       <div class="col-md-10">
         <h5 class="mt-2"><i class="fa fa-user fa-lg"></i> </h5>
@@ -26,7 +26,7 @@ Welcome To Jambo Farmers,
       </div>
       </div>
         <hr>
-        <small class="text-muted"><i class="fa fa-clock-o"></i> Joined  ago</small>
+        <small class="text-muted"><i class="fa fa-clock-o"></i> Joined {{dealer.user.timestamp|timesince}} ago</small>
         <div class="card mt-2 mb-4">
           <div class="card-header border-success">
             ABOUT

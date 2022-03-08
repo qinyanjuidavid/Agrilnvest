@@ -7,10 +7,13 @@ from farmers.models import ProductCategory
 
 def homeView(request):
     dealerQs = Dealer.objects.all().order_by("?")
+    dealers_count = (Dealer.objects.values(
+        'category').count())
+
     categoriesQuery = ProductCategory.objects.all()
     orderFilter = OrderFilter(request.GET, queryset=dealerQs)
-
     context = {
+        "dealers_count": dealers_count,
         "filter": orderFilter,
         "categories": categoriesQuery
     }
@@ -30,32 +33,11 @@ def CategoryFilterView(request, category):
     return render(request, "farmers/categoryFilter.html", context)
 
 
-def suppliers_category(request):
-    context = {
-
-    }
-    return render(request, "farmers/category.html", context)
-
-
 def SupportView(request):
     context = {
 
     }
     return render(request, "farmers/support.html", context)
-
-
-def supplierDetailsView(request, username):
-    context = {
-
-    }
-    return render(request, "farmers/supplierDetails.html", context)
-
-
-def supplierCategoryView(request):
-    context = {
-
-    }
-    return render(request, "farmers/category.html", context)
 
 
 def productAddView(request):
@@ -65,8 +47,11 @@ def productAddView(request):
     return render(request, "farmers/product_add.html", context)
 
 
-def dealersDetailsView(request):
+def dealersDetailsView(request, username):
+    dealerQs = Dealer.objects.get(
+        user__username=username
+    )
     context = {
-
+        "dealer": dealerQs
     }
     return render(request, "farmers/dealerDetails.html", context)

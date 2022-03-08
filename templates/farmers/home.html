@@ -16,9 +16,12 @@
           >
             <a class="text-white">BROWSE BY <b>CATEGORY</b></a>
           </div>
-          <div class="row no-gutters overflow-auto">
+          <div
+            class="row no-gutters flex-row flex-nowrap"
+            style="overflow-x: auto; white-space: normal"
+          >
             <!--====================-->
-            <div class="col-md-2" style="display: inline-block; float: none">
+            <div class="col-md-2">
               <div class="top-category text-center no-border-left">
                 <a href="{%url 'farmers:home'%}">
                   <span class="icon">
@@ -30,8 +33,10 @@
                   </span>
 
                   <p>
-                    <span class="badge badge-sm badge-warning">124</span><br />
-                    <span>All</span>
+                    <span class="badge badge-md badge-warning">
+                      <b>{{dealers_count}} </b> </span
+                    ><br />
+                    <span><b>All</b></span>
                   </p></a
                 >
               </div>
@@ -49,8 +54,9 @@
                   </span>
 
                   <p>
-                    <span class="badge badge-sm badge-warning">124</span><br />
-                    <span>{{category.category}}</span>
+                    <span class="badge badge-sm badge-warning"><b>124</b></span
+                    ><br />
+                    <span><b>{{category.category}}</b></span>
                   </p></a
                 >
               </div>
@@ -68,14 +74,13 @@
 {%endblock%} {%block content%}
 
 <div class="row">
+  {%for dealer in filter.qs%}
   <div class="col-sm-12 ftco-animate">
     <div
       class="job-post-item p-4 d-block d-lg-flex align-items-center"
       align="center"
     >
-      {%for dealer in filter.qs%}
       <!---->
-
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-3">
@@ -108,10 +113,10 @@
               </p>
               <span class="seen text-dark"
                 ><i class="fa fa-clock-o"></i> Joined
-                {{dealer.user.timestamp|timesince}} ago</span
-              >
+                {{dealer.user.timestamp|timesince}} ago
+              </span>
               <p>
-                <a href="{%url 'farmers:dealersDetails'%}">
+                <a href="{%url 'farmers:dealersDetails' dealer.user.username%}">
                   <button
                     class="btn btn-md text-white mt-3"
                     style="background-color: #206dfb"
@@ -125,9 +130,9 @@
           </div>
         </div>
       </div>
-      {%endfor%}
     </div>
   </div>
+  {%endfor%}
 </div>
 {%endblock%} {%block side%}
 
@@ -193,4 +198,4 @@
   </form>
 </div>
 
-{%endblock%}
+{%endblock%} {% comment %} style="display: inline-block" {% endcomment %}
