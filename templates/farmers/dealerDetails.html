@@ -18,51 +18,58 @@ Welcome To Jambo Farmers,
   <div class="col-md-12 p-3 bg-white mb-3">
     <div class="row">
       <div class="col-md-2">
-        <img src="{{dealer.profile_picture.url}}" height=80px width=80px alt="">
+        <img src="{{dealer.profile_picture.url}}" height=100px width=100px alt="">
       </div>
       <div class="col-md-10">
-        <h5 class="mt-2"><i class="fa fa-user fa-lg"></i> </h5>
-        <h5><span class="icon-my_location"></span> </h5>
+        {%if dealer.user.full_name%}
+        <h5 class="mt-2"><i class="fa fa-user fa-lg"></i> <b>{{dealer.user.full_name|title}}</b></h5>
+        {%endif%}
+        {%if dealer.county%}
+        <h5><span class="icon-my_location"></span> {{dealer.county|title}}, Kenya</h5>
+        {%endif%}
       </div>
       </div>
         <hr>
-        <small class="text-muted"><i class="fa fa-clock-o"></i> Joined {{dealer.user.timestamp|timesince}} ago</small>
+        {%if dealer.user.timestamp%}
+        <p class="text-muted"><i class="fa fa-clock-o"></i> Joined {{dealer.user.timestamp|timesince}} ago</p>
+        {%endif%}
         <div class="card mt-2 mb-4">
           <div class="card-header border-success">
-            ABOUT
+            <h5>ABOUT</h5>
           </div>
           <div class="card-body">
-        
+            {%if dealer.bio%}
+            {{dealer.bio|title}}
+            {%endif%}
           </div>
         </div>
-        <b class=" ml-1 text-dark">ADDITIONAL DETAILS</b>
+        <h5 class="ml-2">ADDITIONAL DETAILS</h5>
         <hr>
         <div class="row">
           <div class="col-sm-7">
               <ul class="pl-3" style=list-style-type:none;>
                 <div class="card col-sm-10 border-success" style=border-radius:8px;>
-                <li><b>DERIVERY:</b><span class="mr-5"> </span></li>
-                <li><b>RESPONSE TIME:</b><span class="mr-5"> </span></li>
-                <li><b>TERMS OF PRICE:</b><span class="mr-5"> </span></li>
-                <hr>
+                  {%if dealer.category.category%}
+                 <li class="m-2"><b>CATEGORY:</b><span class="badge badge-warning badge-lg float-right"> {{dealer.category.category|title}}</span></li>
+                 {%endif%}
+                  <li class="m-2"><b>RATING:</b><span class="mr-5"> </span></li>
+                  {%if dealer.derivery%}
+                  <li class="m-2"><b>DERIVERY:</b><span class="badge badge-warning badge-lg float-right"> {{dealer.derivery|title}}</span></li>
+                  {%endif%}
+                  {%if dealer.response%}
+                <li class="m-2"><b>RESPONSE TIME:</b><span class="badge badge-warning float-right">{{dealer.response|title}} </span></li>
+                {%endif%}
                 <p></p>
               </div>
           
             </ul>
           </div>
           <div class="col-sm-5">
-            <div class="card bg-mute text-dark">
-              <ul class="pl-3" style=list-style-type:none;>
-                <li><small><b>CATEGORY:</b></small><span class="mr-5">
-                N/A
-                
-              </span></li>
-              <li><small><b>LEVEL:</b></small><span class="mr-5"> New/span></li>
-              <li><small><b>RATING:</b></small><span class="mr-5"> </span></li>
-            </ul>
-            </div>
+           
             <p>
+            <a href="tel:{{dealer.user.phone}}">
             <button class="btn btn-success col-sm-5 mt-2"><i class="fa fa-phone"></i></button>
+            </a>
             <hr>
           </p>
 <!-- ==================================Rating================================= -->
@@ -88,6 +95,111 @@ Welcome To Jambo Farmers,
             <br>
             <div id="confirm-box"></div>
             </div>
+
+ <!-- ======================================================================== -->
+          <p><i class="fa fa-exclamation-circle text-danger"></i> <small><b>REPORT ABUSE</b></small></p>
+          </div>
+        </div>
+     </div>
+
+  <div class="col-md-12 p-3 bg-white mb-3">
+    <legend class="font-weight-bold mb-2"><b style=color:forestgreen;></b> Product(s)</legend>
+      <hr>
+
+
+
+
+
+
+
+
+
+<div class="container">
+     
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="card shadow-lg" style=border-color:white;>
+          <img src="" height=150px>
+          <div class="p-1">
+            <h5 class="text-success"></h5>
+            <p class="text-muted"></p>
+            <h5><b class="text-primary">1KG @ Ksh. </b></h5>
+            <div class="" >
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  </div>
+   <div class="col-md-12 p-3 bg-white mb-3">
+    <legend class="ml-1">0 Report(S)</legend>
+    <hr>
+   </div>
+</div>
+
+
+
+<div class="col-sm-3 ">
+<div class="p-4 mb-3 bg-white">
+  <div class="row">
+    <div class="col-sm-4">
+  <img src="{{dealer.category.crop_icon.url}}" height=70px width=70px alt="">
+</div>
+<div class="col-sm-8">
+<b></b>
+<div class="ml-1 mt-2">
+  {%if dealer.level%}
+<span class="badge badge-lg badge-primary p-1">{{dealer.level|title}}</span>
+{%endif%}
+  </div>
+</div>
+</div>
+  <hr>
+  <h3 class="h5 text-black mb-3">Contact Info</h3>
+   
+  <p class="mb-0 font-weight-bold">Location </p>
+  <p class="mb-4">
+   {{dealer.town|title}} town
+  </p>
+  <p class="mb-0 font-weight-bold">Phone</p>
+  <p class="mb-4">{{dealer.user.phone}}</p>
+
+  <p class="mb-0 font-weight-bold">Email Address</p>
+   <p class="mb-0">
+    {{dealer.user.email}}
+    {% comment %} <span class="__cf_email__" data-cfemail="671e081215020a060e0b2703080a060e094904080a">[email&#160;protected]</span> {% endcomment %}
+  </p>
+</div>
+
+<div class="p-4 mb-3 bg-white">
+  <h3 class="h5 text-black mb-3">About</h3>
+  <p></p>
+  <p href="#" class="btn btn-primary  py-2 px-4">Learn More</p>
+  <hr>
+  <div class="" align=center>
+  <a href="tel:{{dealer.user.phone}}">
+  <button class="btn btn-danger col-sm-12 mb-2"><i class="fa fa-phone"></i> Call/Text Supplier</button>
+  </a>
+  <a href="mailto:{{dealer.user.email}}">
+    <button class="btn btn-primary col-sm-12 mb-2"><i class="fa fa-envelope"></i> Email User</button>
+  </a>
+  <a href="{%url 'farmers:categoryFilter' dealer.category.category%}">
+  <button class="btn btn-primary col-sm-12 mb-2">Related Suppliers</button>
+  </a>
+</div>
+</div>
+  </div>
+
+</div>
+
+</div>
+ {%endblock%}
+{%block javascript%}
 <script type="text/javascript">
 // Get all the stars
 const one=document.getElementById('first')
@@ -217,100 +329,4 @@ if (one){
 
 
 </script>
- <!-- ======================================================================== -->
-          <p><i class="fa fa-exclamation-circle text-danger"></i> <small><b>REPORT ABUSE</b></small></p>
-          </div>
-        </div>
-     </div>
-
-  <div class="col-md-12 p-3 bg-white mb-3">
-    <legend class="font-weight-bold mb-2"><b style=color:forestgreen;></b> Product(s)</legend>
-      <hr>
-
-
-
-
-
-
-
-
-
-<div class="container">
-     
-    <div class="row">
-
-      <div class="col-sm-4">
-        <div class="card shadow-lg" style=border-color:white;>
-          <img src="" height=150px>
-          <div class="p-1">
-            <h5 class="text-success"></h5>
-            <p class="text-muted"></p>
-            <h5><b class="text-primary">1KG @ Ksh. </b></h5>
-            <div class="" >
-
-          </div>
-          </div>
-        </div>
-      </div>
-   
-    </div>
-
-    
-    
-    
-   
-    
-    </div>
-     </div>
-   <div class="col-md-12 p-3 bg-white mb-3">
-    <legend class="ml-1">0 Report(S)</legend>
-    <hr>
-   </div>
-</div>
-
-
-
-<div class="col-sm-3 ">
-<div class="p-4 mb-3 bg-white">
-  <div class="row">
-    <div class="col-sm-4">
-  <img src="" height=70px width=70px alt="">
-</div>
-<div class="col-sm-8">
-<b></b>
-<div class="ml-1 mt-2">
-<button class="btn btn-outline-success btn-sm pl-3 pr-3 btn-deactive"></button>
-  </div>
-</div>
-</div>
-  <hr>
-  <h3 class="h5 text-black mb-3">Contact Info</h3>
-  <p class="mb-0 font-weight-bold">Location</p>
-  <p class="mb-4"></p>
-  <p class="mb-0 font-weight-bold">Phone</p>
-  <p class="mb-4"></p>
-
-  <p class="mb-0 font-weight-bold">Email Address</p>
-   <p class="mb-0">
-    
-    <span class="__cf_email__" data-cfemail="671e081215020a060e0b2703080a060e094904080a">[email&#160;protected]</span>
-  </p>
-</div>
-
-<div class="p-4 mb-3 bg-white">
-  <h3 class="h5 text-black mb-3">About</h3>
-  <p></p>
-  <p href="#" class="btn btn-primary  py-2 px-4">Learn More</p>
-  <hr>
-  <div class="" align=center>
-  <button class="btn btn-danger col-sm-12 mb-2"><i class="fa fa-phone"></i> Call/Text Supplier</button>
-  <button class="btn btn-primary col-sm-12 mb-2"><i class="fa fa-envelope"></i> Email User</button>
-  <button class="btn btn-primary col-sm-12 mb-2">Related Suppliers</button>
-</div>
-</div>
-  </div>
-
-</div>
-
-</div>
- {%endblock%}
+{%endblock%}
