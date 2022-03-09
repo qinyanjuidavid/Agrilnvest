@@ -1,0 +1,93 @@
+{%load static%}
+<nav
+  class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+  id="ftco-navbar"
+>
+  <div class="container-fluid px-md-4">
+    <a class="navbar-brand" href="">Raky</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#ftco-nav"
+      aria-controls="ftco-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="oi oi-menu mr-2"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        {%if request.user.is_authenticated and request.user.is_customer%}
+        <li class="nav-item">
+          <a href="{%url 'farmers:home'%}" class="nav-link text-white"
+            ><i class="fa fa-home"></i> Home</a
+          >
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a href="{%url 'farmers:home'%}" class="nav-link text-white"
+            ><i class="fa fa-home"></i> Home</a
+          >
+        </li>
+        {%endif%}
+
+        <li class="nav-item">
+          <a href="" class="nav-link text-white"
+            ><i class="fa fa-phone-square"></i> Customer Support</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link text-white"
+            ><i class="fa fa-question-circle"></i> FAQ's</a
+          >
+        </li>
+        {%if request.user.is_authenticated and request.user.is_dealer%}
+        <li class="nav-item">
+          <a href="" class="nav-link text-white"
+            ><i class="fa fa-user"></i> Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link text-white"
+            ><i class="fa fa-sign-out"></i> Logout</a
+          >
+        </li>
+        {%elif request.user.is_authenticated and request.user.is_customer%}
+        <li class="nav-item">
+          <a href="" class="nav-link text-white"
+            ><i class="fa fa-user"></i> Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link text-white"
+            ><i class="fa fa-sign-out"></i> Logout</a
+          >
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a href="{%url 'accounts:dealerSignup'%}" class="nav-link text-white"
+            ><i class="fa fa-pencil-square"></i> Register</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="{%url 'accounts:login'%}" class="nav-link text-white"
+            ><i class="fa fa-sign-in"></i> Login</a
+          >
+        </li>
+        {%endif%} {%if request.user.is_customer%}
+        <li class="nav-item cta cta-colored">
+          <a href="" class="nav-link"> Want Products</a>
+        </li>
+        {%else%}
+        <li class="nav-item cta mr-md-1 mr-3">
+          <a href="{%url 'farmers:product_add'%}" class="nav-link"
+            >Post Products</a
+          >
+        </li>
+        {%endif%}
+      </ul>
+    </div>
+  </div>
+</nav>

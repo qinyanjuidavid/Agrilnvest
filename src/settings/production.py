@@ -7,7 +7,7 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'raki',
+        'NAME': 'racky',
         'USER': 'postgres',
         'PASSWORD': 'letmein20116199623',
         'HOST': 'localhost',
