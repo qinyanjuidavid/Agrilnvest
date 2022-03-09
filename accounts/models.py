@@ -6,6 +6,7 @@ from django.contrib.auth import validators
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext as _
 from farmers.models import ProductCategory
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class TrackingModel(models.Model):
@@ -218,3 +219,20 @@ class Dealer(Profile):
 
     def __str__(self):
         return str(self.user.username)
+
+
+class Rating(models.Model):
+    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
+    rate = models.IntegerField(default=0,
+                               validators=[
+                                   MaxValueValidator(5),
+                                   MinValueValidator(0)
+                               ]
+                               )
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(f"""{self.dealer.user.username}
+                   rated {self.rate} by {self.customer}""")
