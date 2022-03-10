@@ -4,9 +4,9 @@
     <div class="row mb-5">
       <div class="col-md">
         <div class="ftco-footer-widget mb-4">
-          <h2 class="ftco-heading-2">Raky Products Board</h2>
+          <h2 class="ftco-heading-2">Racky Products Board</h2>
           <p>
-            Never worry about sales or income from outbound channels with jambo
+            Never worry about sales or income from outbound channels with Racky
             your farm is directly connected to thousands of customers interested
             in your products.
           </p>
@@ -27,16 +27,22 @@
       </div>
       <div class="col-md">
         <div class="ftco-footer-widget mb-4">
-          <h2 class="ftco-heading-2">Dealers</h2>
+          <h2 class="ftco-heading-2">Farmers</h2>
           <ul class="list-unstyled">
             <li>
-              <a href="" class="pb-1 d-block">Post a Product</a>
+              <a href="{%url 'farmers:product_add'%}" class="pb-1 d-block"
+                >Post a Product</a
+              >
             </li>
             <li>
-              <a href="" class="pb-1 d-block">My Profile</a>
+              <a href="{%url 'accounts:farmerProfile'%}" class="pb-1 d-block"
+                >My Profile</a
+              >
             </li>
             <li>
-              <a href="" class="pb-1 d-block">Farmer Signup</a>
+              <a href="{%url 'accounts:dealerSignup'%}" class="pb-1 d-block"
+                >Farmer Signup</a
+              >
             </li>
           </ul>
         </div>
@@ -49,10 +55,14 @@
               <a href="" class="pb-1 d-block">Browse Products</a>
             </li>
             <li>
-              <a href="" class="pb-1 d-block">My Profile</a>
+              <a href="{%url 'accounts:customerProfile'%}" class="pb-1 d-block"
+                >My Profile</a
+              >
             </li>
             <li>
-              <a href="" class="pb-1 d-block">Customer Signup</a>
+              <a href="{%url 'accounts:customerSignup'%}" class="pb-1 d-block"
+                >Customer Signup</a
+              >
             </li>
           </ul>
         </div>
@@ -65,10 +75,14 @@
               <a href="" class="pb-1 d-block">My Account</a>
             </li>
             <li>
-              <a href="" class="pb-1 d-block">Sign In</a>
+              <a href="{%url 'accounts:login'%}" class="pb-1 d-block"
+                >Sign In</a
+              >
             </li>
             <li>
-              <a href="" class="pb-1 d-block">Create Account</a>
+              <a href="{%url 'accounts:dealerSignup'%}" class="pb-1 d-block"
+                >Create Account</a
+              >
             </li>
           </ul>
         </div>
@@ -101,7 +115,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 text-center">
-        <p>Copyright &copy; 2022 Raky.io, All rights reserved</p>
+        <p>Copyright &copy; 2022 Racky, All rights reserved</p>
       </div>
     </div>
   </div>

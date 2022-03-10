@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from accounts.models import Dealer, User
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from accounts.models import Dealer, User, Rating
 from farmers.filters import OrderFilter
 from farmers.models import ProductCategory
+from accounts.decorators import customer_required
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def homeView(request):
@@ -55,3 +58,33 @@ def dealersDetailsView(request, username):
         "dealer": dealerQs
     }
     return render(request, "farmers/dealerDetails.html", context)
+
+
+@login_required
+@customer_required
+def rateFarmer(request):
+    if request.method == "POST":
+        customer_id = request.POST.get('customer_id')
+        el_id = request.POST.get('el_id')
+        val = request.POST.get('val')
+
+        # get the dealer
+        dealer = Dealer.objects.get(pk=el_id)
+
+        # update a rating instance
+        try:
+            obj = Rating.objects.get(Q(dealer=dealer),
+                                     Q(customer=request.user))
+
+            obj.rate = val
+            obj.save()
+        except Rating.DoesNotExist:
+            # create a rating
+            obj = Rating(dealer=dealer, customer=request.user, rate=val)
+            obj.save()
+        return JsonResponse(
+            {
+                "Success": "true", "rate": val
+            }, safe=False
+        )
+    return JsonResponse({"success": "false"})

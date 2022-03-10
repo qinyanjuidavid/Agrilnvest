@@ -1,6 +1,9 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,11 +39,19 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'django_filters',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 PHONENUMBER_DB_FORMAT = "NATIONAL"
 PHONENUMBER_DEFAULT_REGION = "KE"
 
 AUTH_USER_MODEL = "accounts.User"
+
+cloudinary.config(
+    cloud_name="racky-io",
+    api_key="248511473114217",
+    api_secret="5T-2WnVdY4desacYt0ssNa154Xg"
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -119,6 +130,10 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = "/accounts/login/"  # directs you to the login page
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

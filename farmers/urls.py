@@ -11,5 +11,6 @@ urlpatterns = [
     path(
         "category/<str:category>/",
         views.CategoryFilterView, name="categoryFilter"
-    )
+    ),
+    path('farmer/rating', views.rateFarmer, name="rateFarmer"),
 ]

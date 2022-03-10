@@ -87,3 +87,24 @@ class customerSignupView(CreateView):
             user.save()
             send_activation_mail(user, self.request)
         return render(self.request, "accounts/sign_alert.html")
+
+
+def Farmer_Profile_View(request):
+    context = {
+
+    }
+    return render(request, "accounts/farmerProfile.html", context)
+
+
+def Customer_Profile_View(request):
+    context = {
+
+    }
+    return render(request, "accounts/customerProfile.html", context)
+
+
+def administrator_Profile_View(request):
+    context = {
+
+    }
+    return render(request, "accounts/administratorProfile.html", context)

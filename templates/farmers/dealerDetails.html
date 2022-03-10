@@ -303,7 +303,7 @@ if (one){
 
       $.ajax({
         type:"POST",
-        url:"",
+        url:"{%url 'farmers:rateFarmer'%}",
         data:{
           'csrfmiddlewaretoken':csrf[0].value,
           'el_id':"{{ dealer.pk }}",
