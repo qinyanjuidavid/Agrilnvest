@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from accounts.models import Dealer, User, Rating
 from farmers.filters import OrderFilter
+from farmers.forms import ProductAddForm, DealerCategoryForm
 from farmers.models import ProductCategory
-from accounts.decorators import customer_required
+from accounts.decorators import customer_required, dealer_required
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib import messages
 
 
 def homeView(request):
@@ -43,8 +45,32 @@ def SupportView(request):
     return render(request, "farmers/support.html", context)
 
 
+@login_required
+@dealer_required
 def productAddView(request):
+    dealerQs = Dealer.objects.get(user=request.user)
+    form = ProductAddForm()
+    categoryForm = DealerCategoryForm()
+    if request.method == "POST":
+        form = ProductAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            qsForm = form.save(commit=False)
+            qsForm.dealer = dealerQs
+            qsForm.save()
+            messages.success(request, "The product was successfully added.")
+
+        else:
+            form = ProductAddForm()
+            category = dealerQs.category
+            initial_data = {
+                "category": category,
+            }
+            categoryForm = DealerCategoryForm(initial=initial_data)
+
     context = {
+        "form": form,
+        "dealer": dealerQs,
+        "categoryForm": categoryForm
 
     }
     return render(request, "farmers/product_add.html", context)
