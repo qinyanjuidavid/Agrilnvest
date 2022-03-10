@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from accounts.models import Dealer, User, Rating
 from farmers.filters import OrderFilter
-from farmers.forms import ProductAddForm, DealerCategoryForm
+from farmers.forms import ProductAddForm, FarmerCategoryForm
 from farmers.models import ProductCategory
 from accounts.decorators import customer_required, dealer_required
 from django.contrib.auth.decorators import login_required
@@ -50,7 +50,7 @@ def SupportView(request):
 def productAddView(request):
     dealerQs = Dealer.objects.get(user=request.user)
     form = ProductAddForm()
-    categoryForm = DealerCategoryForm()
+    categoryForm = FarmerCategoryForm()
     if request.method == "POST":
         form = ProductAddForm(request.POST, request.FILES)
         if form.is_valid():
@@ -65,7 +65,7 @@ def productAddView(request):
             initial_data = {
                 "category": category,
             }
-            categoryForm = DealerCategoryForm(initial=initial_data)
+            categoryForm = FarmerCategoryForm(initial=initial_data)
 
     context = {
         "form": form,
