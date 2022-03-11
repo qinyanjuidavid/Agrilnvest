@@ -166,7 +166,10 @@ class Administrator(Profile):
 
 
 class Customer(Profile):
-    pass
+    county = models.ForeignKey(Counties, on_delete=models.DO_NOTHING,
+                               blank=True, null=True)
+    town = models.CharField(max_length=100, blank=True, null=True)
+    estate = models.CharField(max_length=106, blank=True, null=True)
 
     def __str__(self):
         return str(self.user.username)

@@ -62,3 +62,18 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("full_name", "phone",)
+
+
+class CustomerProfileUpdateForm(forms.ModelForm):
+    bio = forms.CharField(label="Bio",
+                          widget=forms.Textarea(attrs={
+                              "class": "form-control",
+                                "placeholder": "Briefly describe yourself",
+                              "rows": "4",
+                              "cols": "25"
+                          }))
+
+    class Meta:
+        model = Customer
+        fields = ("bio", "profile_picture",
+                  "county", "town", "estate")

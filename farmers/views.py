@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from accounts.models import Dealer, User, Rating
+from accounts.models import Dealer, User, Rating, Product
 from farmers.filters import OrderFilter
 from farmers.forms import ProductAddForm, FarmerCategoryForm
 from farmers.models import ProductCategory

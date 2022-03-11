@@ -74,7 +74,7 @@
 
         {%if request.user.is_authenticated and request.user.role == "Customer"%}
         <li class="nav-item cta cta-colored">
-          <a href="" class="nav-link"> Want Products</a>
+          <a href="{%url 'farmers:home'%}" class="nav-link"> Want Products</a>
         </li>
         {%else%}
         <li class="nav-item cta mr-md-1 mr-3">

@@ -1,6 +1,7 @@
+from calendar import c
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from accounts.models import User, Dealer
+from accounts.models import User, Dealer, Customer
 from accounts.decorators import (
     administrator_required, customer_required,
     dealer_required)
@@ -24,7 +25,7 @@ from django.views.generic import CreateView
 from accounts.tokens import account_activation_token
 from accounts.forms import UserSignUpForm
 from accounts.sendMails import send_activation_mail
-from accounts.forms import FarmerProfileUpdateForm, UserUpdateForm
+from accounts.forms import FarmerProfileUpdateForm, UserUpdateForm, CustomerProfileUpdateForm
 
 
 def dealers_profile_view(request):
@@ -119,9 +120,31 @@ def Farmer_Profile_View(request):
     return render(request, "accounts/farmerProfile.html", context)
 
 
+@login_required
+@customer_required
 def Customer_Profile_View(request):
-    context = {
+    customerQs = Customer.objects.get(user=request.user)
+    form = CustomerProfileUpdateForm(instance=customerQs)
+    userForm = UserUpdateForm(instance=request.user)
+    if request.method == "POST":
+        form = CustomerProfileUpdateForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=customerQs)
+        userForm = UserUpdateForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=request.user)
+        if form.is_valid() and userForm.is_valid():
+            form.save()
+            userForm.save()
+            messages.success(request, "Profile successfully updated.")
+            return HttpResponseRedirect("/accounts/customer/profile/")
 
+    context = {
+        "form": form,
+        "userForm": userForm,
+        "customerQs": customerQs
     }
     return render(request, "accounts/customerProfile.html", context)
 
