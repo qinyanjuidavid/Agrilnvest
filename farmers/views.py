@@ -31,9 +31,12 @@ def CategoryFilterView(request, category):
     ).order_by("?")
     categoriesQuery = ProductCategory.objects.all()
     orderFilter = OrderFilter(request.GET, queryset=dealerQs)
+    dealers_count = (Dealer.objects.values(
+        'category').count())
     context = {
         "filter": orderFilter,
-        "categories": categoriesQuery
+        "categories": categoriesQuery,
+        "dealers_count": dealers_count
     }
     return render(request, "farmers/categoryFilter.html", context)
 
