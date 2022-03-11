@@ -1,7 +1,10 @@
-{%extends 'accounts/try.html'%} {%load static%} {%load crispy_forms_tags%}
-{%block title%} Add Product {%endblock%}
+{%extends 'accounts/index.html'%}
 <!---->
-{% load widget_tweaks %} {%block content%}
+{%load static%} {% load widget_tweaks %}{%load crispy_forms_tags%}
+<!---->
+{%block title%} Post Product {%endblock%}
+<!---->
+{%block content%}
 <div class="container">
   <div class="row mt-3">
     <div class="col-sm-9">
@@ -9,7 +12,6 @@
         <legend class="mr-2">
           <i><b class="text-info">Add</b></i> Product
         </legend>
-
         <form
           action="."
           class="bg-white"
@@ -50,7 +52,12 @@
       <div class="p-4 mb-3 bg-white">
         <div class="row">
           <div class="col-sm-4">
-            <img src="" height="70px" width="70px" alt="" />
+            <img
+              src="{{dealer.profile_picture.url}}"
+              height="100px"
+              width="100px"
+              alt=""
+            />
           </div>
           <div class="col-sm-8">
             <b></b>
@@ -60,12 +67,12 @@
         <hr />
         <h3 class="h5 text-black mb-3">Contact Info</h3>
         <p class="mb-0 font-weight-bold">Address</p>
-        <p class="mb-4"></p>
+        <p class="mb-4">{{dealer.town|title}}</p>
         <p class="mb-0 font-weight-bold">Phone</p>
-        <p class="mb-4"></p>
+        <p class="mb-4">{{dealer.user.phone}}</p>
 
         <p class="mb-0 font-weight-bold">Email Address</p>
-        <p class="mb-0"></p>
+        <p class="mb-0">{{dealer.user.email}}</p>
       </div>
       <div class="p-4 mb-3 bg-white">
         <h3 class="h5 text-black mb-3">More Info</h3>

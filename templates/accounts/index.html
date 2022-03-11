@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{%block title%}{%endblock%}</title>
+    <title>Racky | {%block title%}{%endblock%}</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -10,6 +10,12 @@
     />
 
     <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
@@ -43,53 +49,17 @@
     <link rel="stylesheet" href="{%static 'css/icomoon.css'%}" />
     <link rel="stylesheet" href="{%static 'css/style.css'%}" />
   </head>
-  <body class="mt-5">
-    {%include 'includes/nav.html'%} {%block search%} {%endblock%}
-
+  <body>
+    {%include 'includes/nav.html'%}
     <section class="ftco-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9">{%block content%} {%endblock%}</div>
-          <div class="col-lg-3 sidebar">{%block side%} {%endblock%}</div>
-        </div>
-      </div>
-    </section>
+      <!-- <div class="container"> -->
 
-    <section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div
-              class="col-md-7 text-center heading-section heading-section-white ftco-animate"
-            >
-              <h2>Subcribe to our Newsletter</h2>
-              <p>
-                Far far away, in our farms, far from the our cities, there live
-                the blind texts, that can alert you about the new product
-                listings.
-              </p>
-              <div class="row d-flex justify-content-center mt-4 mb-4">
-                <div class="col-md-12">
-                  <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter email address"
-                      />
-                      <input
-                        type="submit"
-                        value="Subscribe"
-                        class="submit px-3"
-                      />
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- <div class="col-lg-12"> -->
+      {%block content%} {%endblock%}
+
+      <!-- </div> -->
+
+      <!-- </div> -->
     </section>
 
     {%include 'includes/footer.html'%}
@@ -119,7 +89,23 @@
       </svg>
     </div>
     <!-- Optional JavaScript -->
+    {%block javascript%} {%endblock%}
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="{%static 'js/jquery.min.js'%}"></script>
     <script src="{%static 'js/jquery-migrate-3.0.1.min.js'%}"></script>

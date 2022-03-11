@@ -50,7 +50,12 @@ def SupportView(request):
 def productAddView(request):
     dealerQs = Dealer.objects.get(user=request.user)
     form = ProductAddForm()
-    categoryForm = FarmerCategoryForm()
+    category = dealerQs.category
+    initial_data = {
+        "category": category,
+    }
+    categoryForm = FarmerCategoryForm(initial=initial_data)
+
     if request.method == "POST":
         form = ProductAddForm(request.POST, request.FILES)
         if form.is_valid():
@@ -62,12 +67,6 @@ def productAddView(request):
             return HttpResponseRedirect("/post/products/")
         else:
             form = ProductAddForm()
-            category = dealerQs.category
-            initial_data = {
-                "category": category,
-            }
-            categoryForm = FarmerCategoryForm(initial=initial_data)
-
     context = {
         "form": form,
         "dealer": dealerQs,
