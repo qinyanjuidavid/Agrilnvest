@@ -55,10 +55,11 @@ def productAddView(request):
         form = ProductAddForm(request.POST, request.FILES)
         if form.is_valid():
             qsForm = form.save(commit=False)
-            qsForm.dealer = dealerQs
+            qsForm.farmer = dealerQs
+            qsForm.category = dealerQs.category
             qsForm.save()
             messages.success(request, "The product was successfully added.")
-
+            return HttpResponseRedirect("/post/products/")
         else:
             form = ProductAddForm()
             category = dealerQs.category
@@ -70,7 +71,7 @@ def productAddView(request):
     context = {
         "form": form,
         "dealer": dealerQs,
-        "categoryForm": categoryForm
+        "catForm": categoryForm
 
     }
     return render(request, "farmers/product_add.html", context)

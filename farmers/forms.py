@@ -1,16 +1,34 @@
 from django import forms
-from farmers.models import Product
-from accounts.models import Farmer
+# from farmers.models import Product
+from accounts.models import Dealer, Product
 
 
 class ProductAddForm(forms.ModelForm):
     description = forms.CharField(label="Description",
                                   widget=forms.Textarea(attrs={
                                       "class": "form-control",
-                                      "placeholder": "Brief description about the product",
+                                      "placeholder": "Brief description of your product",
                                       "rows": "6",
                                       "cols": "25"
                                   }))
+    quantity = forms.CharField(
+        label="Quantity",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Number of Kgs available"
+        })
+    )
+    price = forms.CharField(
+        label="Price",
+        widget=forms.NumberInput(attrs={
+            "placeholder": "Price per Kg"
+        })
+    )
+    item = forms.CharField(
+        label="Product",
+        widget=forms.NumberInput(attrs={
+            "placeholder": "Name of your farm product"
+        })
+    )
 
     class Meta:
         model = Product
@@ -25,5 +43,5 @@ class FarmerCategoryForm(forms.ModelForm):
                                )
 
     class Meta:
-        model = Farmer
+        model = Dealer
         fields = ('category',)

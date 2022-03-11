@@ -1,5 +1,7 @@
 {%extends 'accounts/try.html'%} {%load static%} {%load crispy_forms_tags%}
-{%block title%} Add Product {%endblock%} {%block content%}
+{%block title%} Add Product {%endblock%}
+<!---->
+{% load widget_tweaks %} {%block content%}
 <div class="container">
   <div class="row mt-3">
     <div class="col-sm-9">
@@ -14,13 +16,31 @@
           method="POST"
           enctype="multipart/form-data"
         >
-          {%csrf_token%}
-          <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6"></div>
+          {%csrf_token%} {% for field in catForm.visible_fields %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field|add_class:'form-control' }}
+            <!---->
+            {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
           </div>
-          <button type="submit" class="btn btn-outline-success">
-            Add Product
+          {% endfor %} {% for field in form.visible_fields %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field|add_class:'form-control' }}
+            <!---->
+            {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
+          </div>
+          {% endfor %}
+          <button
+            class="btn btn-lg text-white col-sm-3 mt-4"
+            style="background-color: #206dfb"
+            type="submit"
+          >
+            Post Product
           </button>
         </form>
       </div>

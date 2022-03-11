@@ -236,3 +236,24 @@ class Rating(models.Model):
     def __str__(self):
         return str(f"""{self.dealer.user.username}
                    rated {self.rate} by {self.customer}""")
+
+
+class Product(models.Model):
+    item = models.CharField(_("item"), max_length=157)
+    farmer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
+    quantity = models.FloatField(
+        default=0.00, help_text="Number of Kgs available")
+    image = models.ImageField(upload_to="products/%y%m/%d")
+    price = models.FloatField(_("price"))
+    approve = models.BooleanField(_("approve"), default=True)
+    description = models.TextField(_("description"), blank=True, null=True)
+    on_stock = models.BooleanField(_("on stock"), default=True)
+    category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
+    date_added = models.DateTimeField(_("date added"), auto_now_add=True)
+    date_updated = models.DateTimeField(_("date updated"), auto_now=True)
+
+    def __str__(self):
+        return str(self.item)
+
+    class Meta:
+        verbose_name_plural = "Products"
