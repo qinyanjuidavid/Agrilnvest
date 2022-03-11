@@ -38,3 +38,27 @@ class UserSignUpForm(ModelForm):
             user.save()
 
         return user
+
+
+class FarmerProfileUpdateForm(forms.ModelForm):
+    bio = forms.CharField(label="Bio",
+                          widget=forms.Textarea(attrs={
+                              "class": "form-control",
+                              "placeholder": "Briefly describe yourself",
+                              "rows": "4",
+                              "cols": "25"
+                          }))
+
+    class Meta:
+        model = Dealer
+        fields = ("category", "protect_email",
+                  "derivery", "response", "county",
+                  "town", "estate", "profile_picture",
+                  "bio",
+                  )
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("full_name", "phone",)

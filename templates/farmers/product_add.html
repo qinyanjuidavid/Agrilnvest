@@ -82,42 +82,4 @@
     </div>
   </div>
 </div>
-{%endblock%} {% block javascript %}
-<script>
-  var category = document.getElementById("id_category");
-  var itemElement = document.getElementById("id_item");
-
-  // listen to change event
-  function updateProducts() {
-    // clear products items
-    itemElement.innerHTML = "";
-
-    // get the value
-    let categoryValue = category.value;
-
-    // get the respective product for each category
-    $.ajax({
-      url: "",
-      data: { category: categoryValue },
-      type: "GET",
-      success: function (response) {
-        // update the
-        let items = JSON.parse(response);
-        console.log(items);
-
-        // update product options
-        items.products.forEach((item) => {
-          let option =
-            "<option value='" + item.pk + "'>" + item.name + "</option>";
-          itemElement.innerHTML += option;
-        });
-      },
-      error: function (error) {
-        console.error(error);
-      },
-    });
-  }
-
-  updateProducts();
-</script>
-{% endblock %}
+{%endblock%} {% block javascript %} {% endblock %}

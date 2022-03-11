@@ -40,13 +40,15 @@
         <!---->
         {%if request.user.role == "Customer"%}
         <li class="nav-item">
-          <a href="" class="nav-link text-white"
+          <a
+            href="{%url 'accounts:customerProfile'%}"
+            class="nav-link text-white"
             ><i class="fa fa-user"></i> Profile</a
           >
         </li>
         {%elif request.user.role == "Dealer"%}
         <li class="nav-item">
-          <a href="" class="nav-link text-white"
+          <a href="{%url 'accounts:farmerProfile'%}" class="nav-link text-white"
             ><i class="fa fa-user"></i> Profile</a
           >
         </li>

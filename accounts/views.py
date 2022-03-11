@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from accounts.models import User
+from accounts.models import User, Dealer
 from accounts.decorators import (
     administrator_required, customer_required,
     dealer_required)
@@ -24,6 +24,7 @@ from django.views.generic import CreateView
 from accounts.tokens import account_activation_token
 from accounts.forms import UserSignUpForm
 from accounts.sendMails import send_activation_mail
+from accounts.forms import FarmerProfileUpdateForm, UserUpdateForm
 
 
 def dealers_profile_view(request):
@@ -89,9 +90,31 @@ class customerSignupView(CreateView):
         return render(self.request, "accounts/sign_alert.html")
 
 
+@login_required
+@dealer_required
 def Farmer_Profile_View(request):
+    dealerQs = Dealer.objects.get(user=request.user)
+    form = FarmerProfileUpdateForm(instance=dealerQs)
+    userForm = UserUpdateForm(instance=request.user)
+    if request.method == "POST":
+        form = FarmerProfileUpdateForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=dealerQs)
+        userForm = UserUpdateForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=request.user
+        )
+        if form.is_valid() and userForm.is_valid():
+            form.save()
+            userForm.save()
+            messages.success(request, "Profile successfully updated.")
+            return HttpResponseRedirect("/accounts/farmer/profile/")
     context = {
-
+        "form": form,
+        "userForm": userForm,
+        "dealer": dealerQs
     }
     return render(request, "accounts/farmerProfile.html", context)
 

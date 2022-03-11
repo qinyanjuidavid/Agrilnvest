@@ -7,161 +7,56 @@
 {%block content%}
 <div class="container">
   <div class="row mt-3">
-    <div class="col-sm-4">
-      <div class="col-md-12 p-3 bg-white mb-3" align="center">
-        <div class="card border-white align-items-center" align="center">
-          <img
-            class="rounded-circle"
-            src="{{supplier.profile_picture.url}}"
-            height="150"
-            width="150"
-            alt=""
-          />
-          <div class="mt-3">
-            <h4>
-              {%if supplier.user.first_name or supplier.user.last_name%}
-              {{supplier.user.first_name|title}}
-              {{supplier.user.last_name|title}} {%else%}
-              {{supplier.user.username|title}} {%endif%}
-            </h4>
-            <p class="text-secondary">
-              {{supplier.about|title|truncatewords:15}}
-            </p>
-            <a href="{%url 'Store:products'%}"
-              ><button class="btn btn-outline-primary">View Products</button></a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 p-3 bg-white" align="center">
-        <div class="card border-success">
-          <ul class="list-group list-group-flush">
-            {%if supplier.user.username%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Username</h6>
-              <span class="text-secondary"
-                >{{supplier.user.username|title}}</span
-              >
-            </li>
-            {%endif%} {%if supplier.user.first_name%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Name</h6>
-              <span class="text-secondary"
-                >{{supplier.user.first_name|title}}
-                {{supplier.user.last_name|title}}</span
-              >
-            </li>
-            {%endif%} {%if supplier.user.email%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Email</h6>
-              <span class="text-secondary">{{supplier.user.email}}</span>
-            </li>
-            {%endif%} {%if supplier.phone%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Phone</h6>
-              <span class="text-secondary">{{supplier.phone}}</span>
-            </li>
-            {%endif%} {%if supplier.location%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Location</h6>
-              <span class="text-secondary">{{supplier.location}}</span>
-            </li>
-            {%endif%} {%if supplier.category.category%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Category</h6>
-              <span class="text-secondary">{{supplier.category.category}}</span>
-            </li>
-            {%endif%} {%if supplier.derivery.derivery%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Derivery</h6>
-              <span class="text-secondary">{{supplier.derivery.derivery}}</span>
-            </li>
-            {%endif%} {%if supplier.response.response%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Response Time</h6>
-              <span class="text-secondary">{{supplier.response.response}}</span>
-            </li>
-            {%endif%} {%if supplier.price_range%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Price Range</h6>
-              <span class="text-secondary">{{supplier.price_range}}</span>
-            </li>
-            {%endif%} {%if supplier.price_terms.terms%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Price Terms</h6>
-              <span class="text-secondary">{{supplier.price_terms.terms}}</span>
-            </li>
-            {%endif%} {%if supplier.protect_email%}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-            >
-              <h6 class="mb-0">Email Protection</h6>
-              <span class="text-secondary">
-                {%if supplier.protect_email == True%}
-                <i class="fa fa-check fa-lg text-success"></i>
-                {%else%}
-                <i class="fa fa-times fa-lg text-danger"></i>
-                {%endif%}
-              </span>
-            </li>
-            {%endif%}
-          </ul>
-        </div>
+    <div class="col-sm-9">
+      <div class="col-md-12 p-3 bg-white mb-3 text-left">
+        <legend class="mr-2">
+          <i><b class="text-info">Add</b></i> Product
+        </legend>
+        <form
+          action="."
+          class="bg-white"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {%csrf_token%}
+          <button
+            class="btn btn-lg text-white col-sm-3 mt-4"
+            style="background-color: #206dfb"
+            type="submit"
+          >
+            update Profile
+          </button>
+        </form>
       </div>
     </div>
-    <div class="col-sm-8 text-left">
-      <div class="p-4 mb-3 bg-white text-left">
-        <legend class="mr-2">
-          <i><b class="text-info">Update</b></i> Profile
-        </legend>
-        <form method="POST" action="" enctype="">
-          {%csrf_token%}
-          <div class="row">
-            <div class="col-sm-6">
-              {{userForm.username|as_crispy_field}}
-              {{form.phone|as_crispy_field}}
-              {{userForm.last_name|as_crispy_field}}
-              {{userForm.first_name|as_crispy_field}}
-              {{form.category|as_crispy_field}}
-              {{form.location|as_crispy_field}}
-              {{form.price_terms|as_crispy_field}}
-              {{form.derivery|as_crispy_field}}
-              {{form.response|as_crispy_field}}
-            </div>
-            <div class="col-sm-6">
-              {{form.derivery|as_crispy_field}}
-              {{form.response|as_crispy_field}}
-              {{form.protect_email|as_crispy_field}}
-              {{form.profile_picture|as_crispy_field}}
-              {{form.about|as_crispy_field}}
-              {{form.after_sales|as_crispy_field}}
-            </div>
+
+    <div class="col-sm-3 text-left">
+      <div class="p-4 mb-3 bg-white">
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="" height="100px" width="100px" alt="" />
           </div>
-          <button class="btn btn-outline-primary">Update Profile</button>
-        </form>
+          <div class="col-sm-8">
+            <b></b>
+            <div class="ml-1 mt-2"></div>
+          </div>
+        </div>
+        <hr />
+        <h3 class="h5 text-black mb-3">Contact Info</h3>
+        <p class="mb-0 font-weight-bold">Address</p>
+        <p class="mb-4"></p>
+        <p class="mb-0 font-weight-bold">Phone</p>
+        <p class="mb-4"></p>
+
+        <p class="mb-0 font-weight-bold">Email Address</p>
+        <p class="mb-0"></p>
+      </div>
+      <div class="p-4 mb-3 bg-white">
+        <h3 class="h5 text-black mb-3">More Info</h3>
+        <p></p>
+        <p href="#" class="btn btn-primary py-2 px-4">Learn More</p>
       </div>
     </div>
   </div>
 </div>
-
 {%endblock%}
