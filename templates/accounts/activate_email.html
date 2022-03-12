@@ -1,8 +1,9 @@
 {%autoescape off%}
-Welcome To Racky.
+Welcome To Rackey.
+
 Hi {{user.username}}, Please click on the link below to confirm your email,
 http://{{domain}}{%url 'accounts:activate'uidb64=uid token=token%}
 Thanks,
 
-The Racky Team.
+The Rackey Team.
 {%endautoescape%}

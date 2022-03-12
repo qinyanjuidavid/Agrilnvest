@@ -147,7 +147,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE, unique=True)
     bio = models.TextField(_("bio"), blank=True, null=True)
-    profile_picture = CloudinaryField('image', default="default.png")
+    profile_picture = CloudinaryField('profile', default="default.png")
     # profile_picture = models.ImageField(
     #     _("profile picture"), upload_to="picture/%y/%m/%d",
     #     default="default.png")
@@ -248,7 +248,8 @@ class Product(models.Model):
     farmer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
     quantity = models.FloatField(
         default=0.00, help_text="Number of Kgs available")
-    image = models.ImageField(upload_to="products/%y%m/%d")
+    image = CloudinaryField('products')
+    # image = models.ImageField(upload_to="products/%y%m/%d")
     price = models.FloatField(_("price"))
     approve = models.BooleanField(_("approve"), default=True)
     description = models.TextField(_("description"), blank=True, null=True)
