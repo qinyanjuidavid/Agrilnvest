@@ -7,6 +7,7 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext as _
 from farmers.models import ProductCategory
 from django.core.validators import MaxValueValidator, MinValueValidator
+from cloudinary.models import CloudinaryField
 
 
 class TrackingModel(models.Model):
@@ -146,9 +147,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE, unique=True)
     bio = models.TextField(_("bio"), blank=True, null=True)
-    profile_picture = models.ImageField(
-        _("profile picture"), upload_to="picture/%y/%m/%d",
-        default="default.png")
+    profile_picture = CloudinaryField('image', default="default.png")
+    # profile_picture = models.ImageField(
+    #     _("profile picture"), upload_to="picture/%y/%m/%d",
+    #     default="default.png")
 
     class Meta:
         abstract = True
