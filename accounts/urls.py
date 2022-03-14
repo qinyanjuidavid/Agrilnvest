@@ -17,6 +17,8 @@ urlpatterns = [
          name="customerSignup"),
     path("administrator/signup/", adminSignupView.as_view(),
          name="adminSignup"),
+    path('activate/<uidb64>/<token>/',
+         views.activate, name="activate"),
     # Password Reset
     path('password_reset/',
          auth_views.PasswordResetView.as_view(
