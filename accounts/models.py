@@ -146,8 +146,10 @@ class ResponseTime(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE, unique=True)
-    bio = models.TextField(_("bio"), blank=True, null=True)
-    profile_picture = CloudinaryField('profile', default="default.png")
+    bio = models.TextField(_("bio"), blank=True, null=True,
+    default="""I am an energetic and enthusiatic farmer who can help you grow your business,
+     Contact me today for quality and fresh deriveries.""")
+    profile_picture = CloudinaryField('default.png')
     # profile_picture = models.ImageField(
     #     _("profile picture"), upload_to="picture/%y/%m/%d",
     #     default="default.png")
@@ -206,17 +208,19 @@ class Dealer(Profile):
     derivery = models.CharField(
         _("derivery"), max_length=10,
         choices=derivery_choices,
-        blank=True, null=True
+        blank=True, null=True,
+        default=derivery_choices[0][0],
     )
     level = models.CharField(
         _("delivery level"), max_length=14,
         choices=delivery_level,
-        blank=True, null=True
+        blank=True, null=True,
+        default=delivery_level[0][0],
     )
     response = models.ForeignKey(ResponseTime,
                                  on_delete=models.CASCADE,
-                                 blank=True,
-                                 null=True)
+                                 blank=True,null=True,
+                                 default=1)
     county = models.ForeignKey(Counties, on_delete=models.DO_NOTHING,
                                blank=True, null=True)
     town = models.CharField(max_length=100, blank=True, null=True)

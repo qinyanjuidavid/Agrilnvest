@@ -25,7 +25,9 @@ from django.views.generic import CreateView
 from accounts.tokens import account_activation_token
 from accounts.forms import UserSignUpForm
 from accounts.sendMails import send_activation_mail
-from accounts.forms import FarmerProfileUpdateForm, UserUpdateForm, CustomerProfileUpdateForm
+from accounts.forms import (FarmerProfileUpdateForm, UserUpdateForm,
+ CustomerProfileUpdateForm,UserSignUpForm,
+ FarmerSignUpForm)
 
 
 def dealers_profile_view(request):
@@ -37,7 +39,7 @@ def dealers_profile_view(request):
 
 class dealerSignupView(CreateView):
     model = User
-    form_class = UserSignUpForm
+    form_class = FarmerSignUpForm
     template_name = "accounts/dealerSignup.html"
 
     def get_context_data(self, **kwargs):
