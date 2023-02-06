@@ -1,4 +1,4 @@
-# Rackey❤️
+# Agrilnvest❤️
 ### Steps to install and run in local system 🚀🚀🚀
 - Create a virtual environment `python -m venv <env_name>`
 - Activate virtual environment `source <env_name>/bin/activate`
