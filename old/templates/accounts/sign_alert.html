@@ -1,0 +1,15 @@
+{%extends 'accounts/main.html'%}
+<!---->
+{%load static%}
+<!---->
+{%block title%} Signup Alert! {%endblock%}
+<!---->
+{%block content%}
+<div class="container" align="center">
+  <div class="alert alert-success text-left mt-4">
+    We’ve emailed you with a link for activating your account. If you don’t see
+    the email in your inbox, please check your spam folder or contact the Rackey
+    team. Go to the <a href="{%url 'accounts:login'%}">Login Page</a>
+  </div>
+</div>
+{%endblock%}

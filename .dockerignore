@@ -1,0 +1,8 @@
+
+.github
+.gitignore
+.git
+.envs/
+.readthedocs.yml
+.idea
+venv

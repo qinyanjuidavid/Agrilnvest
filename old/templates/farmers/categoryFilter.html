@@ -1,0 +1,204 @@
+{%extends 'accounts/base.html'%}
+<!---->
+{% load widget_tweaks %} {%load crispy_forms_tags%}
+<!---->
+{%load static%} {%load humanize%}
+<!---->
+{%block title%} Farmers Listing {%endblock%}
+<!---->
+{%block category%}
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="category-wrap">
+          <div
+            class="card-header"
+            style="background-color: forestgreen; color: white"
+          >
+            <a class="text-white">BROWSE BY <b>CATEGORY</b></a>
+          </div>
+          <div
+            class="row no-gutters flex-row flex-nowrap"
+            style="overflow-x: auto; white-space: normal"
+          >
+            <!--====================-->
+            <div class="col-md-2" style="display: inline-block; float: none">
+              <div class="top-category text-center no-border-left">
+                <a href="{%url 'farmers:home'%}">
+                  <span class="icon">
+                    <img
+                      src="{%static 'images/all.png'%}"
+                      height="60px"
+                      width="60px"
+                    />
+                  </span>
+
+                  <p>
+                    <span class="badge badge-sm badge-warning"
+                      ><b>{{dealers_count}}</b></span
+                    ><br />
+                    <span><b>All</b></span>
+                  </p></a
+                >
+              </div>
+            </div>
+            {%for category in categories%}
+            <div class="col-md-2" style="display: inline-block; float: none">
+              <div class="top-category text-center no-border-left">
+                <a href="{%url 'farmers:categoryFilter' category.category%}">
+                  <span class="icon">
+                    <img
+                      src="{{category.crop_icon.url}}"
+                      height="60px"
+                      width="60px"
+                    />
+                  </span>
+
+                  <p>
+                    <span class="badge badge-sm badge-warning"><b></b></span
+                    ><br />
+                    <span><b>{{category.category}}</b></span>
+                  </p></a
+                >
+              </div>
+            </div>
+            {%endfor%}
+
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%endblock%} {%block content%}
+
+<div class="row">
+  {%for dealer in filter.qs%}
+  <div class="col-sm-12 ftco-animate">
+    <div
+      class="job-post-item p-4 d-block d-lg-flex align-items-center"
+      align="center"
+    >
+      <!---->
+
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="img">
+              <img
+                class="rounded-circle"
+                src="{{dealer.profile_picture.url}}"
+                height="180px"
+                width="180px"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="text pl-md-4 text-left">
+              <span class="location mb-0 text-dark"
+                ><span class="icon-my_location"></span>
+                {{dealer.county|title}}, Kenya
+              </span>
+              <h2>
+                <i class="fa fa-user fa-sm text-muted"></i>
+                {{dealer.user.full_name|title}}
+              </h2>
+              <span class="position"
+                ><i class="fa fa-tag fa-rotate-90"></i>
+                {{dealer.category.category|title}}
+              </span>
+              <p class="mb-2 text-dark">
+                {{dealer.bio|title|truncatewords:15}}
+              </p>
+              <span class="seen text-dark"
+                ><i class="fa fa-clock-o"></i> Joined
+                {{dealer.user.timestamp|timesince}} ago</span
+              >
+              <p>
+                <a href="{%url 'farmers:dealersDetails' dealer.user.username%}">
+                  <button
+                    class="btn btn-md text-white mt-3"
+                    style="background-color: #206dfb"
+                    type="submit"
+                  >
+                    View Farmer
+                  </button></a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%endblock%} {%block side%}
+
+<div class="sidebar-box bg-white p-4 ftco-animate">
+  <h3 class="heading-sidebar">Browse By Category</h3>
+  <form action="#" class="search-form mb-3">
+    <div class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" class="form-control" placeholder="Search..." />
+    </div>
+  </form>
+  <form method="get" action="" class="browse-form">
+    {{filter.form.category}}
+    <button
+      class="btn btn-sm text-white mt-2"
+      style="background-color: #206dfb"
+      type="submit"
+    >
+      Filter
+    </button>
+  </form>
+</div>
+
+<div class="sidebar-box bg-white p-4 ftco-animate">
+  <h3 class="heading-sidebar">Browse By Location</h3>
+  <form action="#" class="search-form mb-3">
+    <div class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" class="form-control" placeholder="Search..." />
+    </div>
+  </form>
+  <div style="height: 350px; overflow-y: scroll">
+    <form method="get" action="" class="browse-form">
+      {{filter.form.county}}
+      <button
+        class="btn btn-sm text-white mt-2"
+        style="background-color: #206dfb"
+        type="submit"
+      >
+        Filter
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="sidebar-box bg-white p-4 ftco-animate">
+  <h3 class="heading-sidebar">Browse By Response Time</h3>
+  <form action="#" class="search-form mb-3">
+    <div class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" class="form-control" placeholder="Search..." />
+    </div>
+  </form>
+  <form method="get" action="" class="browse-form">
+    {{filter.form.response}}
+    <button
+      class="btn btn-sm text-white mt-2"
+      style="background-color: #206dfb"
+      type="submit"
+    >
+      Filter
+    </button>
+  </form>
+</div>
+
+{%endblock%}

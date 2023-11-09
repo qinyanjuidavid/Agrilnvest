@@ -7,7 +7,7 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext as _
 from farmers.models import ProductCategory
 from django.core.validators import MaxValueValidator, MinValueValidator
-from cloudinary.models import CloudinaryField
+# from cloudinary.models import CloudinaryField
 
 
 class TrackingModel(models.Model):

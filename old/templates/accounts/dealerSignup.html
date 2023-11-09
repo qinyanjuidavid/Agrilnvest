@@ -1,0 +1,54 @@
+{%extends 'accounts/main.html'%}
+<!---->
+{%load static%}{%load crispy_forms_tags%} {% load widget_tweaks %}
+<!---->
+{%block title%} Farmers Signup{%endblock%}
+<!---->
+{%block content%}
+<div class="container mt-3 margin-auto" style="margin: auto">
+  <div class="row text-left">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8 ftco-animate">
+      <div class="job-post-item p-4 d-block d-lg-flex" align="center">
+        <div class="col-sm-12">
+          <h3 class="text-left">Farmers Signup,</h3>
+          <p class="text-left" style="margin: 0; padding-bottom: 1">
+            Welcome to Racky, your agricultural partner
+          </p>
+          <hr />
+          <form action="#" method="post" class="text-left">
+            {%csrf_token%}
+            <!---->
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field|add_class:'form-control' }}
+              <!---->
+              {% for error in field.errors %}
+              <span class="help-block">{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            <button
+              class="btn btn-lg text-white col-sm-4 mt-4"
+              style="background-color: #206dfb"
+              type="submit"
+            >
+              Register
+            </button>
+            <br />
+          </form>
+          <p class="text-left mt-3">
+            <a href="{%url 'accounts:login'%}" class="text-left ml-1"
+              >Already have an Account?</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
+{%endblock%}

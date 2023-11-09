@@ -1,0 +1,5 @@
+DJANGO_READ_DOT_ENV_FILE=True
+DATABASE_URL=postgres://postgres.qejczahteveiszawirlj:35695065D.q@aws-0-us-east-1.pooler.supabase.com:6543/postgres
+DJANGO_DEBUG=True
+
+USE_DOCKER=yes

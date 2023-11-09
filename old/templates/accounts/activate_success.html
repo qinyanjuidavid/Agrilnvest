@@ -1,0 +1,14 @@
+{%extends 'accounts/main.html'%}
+<!---->
+{%load static%}
+<!---->
+{%block title%} Activateion Success {%endblock%}
+<!---->
+{%block content%}
+<div class="container" align="center">
+  <div class="alert alert-success text-left mt-4">
+    Your account was successfully verified, you can now login to your Rackey
+    account. Go to the <a href="{%url 'accounts:login'%}">Login Page</a>
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,121 @@
+{%extends 'accounts/index.html'%}
+<!---->
+{%load crispy_forms_tags%}{% load widget_tweaks %}
+<!---->
+{%block title%} Profile {%endblock%}
+<!---->
+{%block content%}
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-sm-9">
+      <div class="col-md-12 p-3 bg-white mb-3 text-left">
+        <legend class="mr-2">
+          <i><b class="text-info">Update</b></i> Profile
+        </legend>
+        <form
+          action="."
+          class="bg-white"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {%csrf_token%}
+          <!---->
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="{{ userForm.full_name.id_for_label }}"
+                  >{{ userForm.full_name.label }}</label
+                >
+                {{userForm.full_name|add_class:'form-control'}}
+                <label for="{{ userForm.phone.id_for_label }}"
+                  >{{ userForm.phone.label }}</label
+                >
+                {{userForm.phone|add_class:'form-control'}}
+
+                <label for="{{ form.category.id_for_label }}"
+                  >{{ form.category.label }}</label
+                >
+                {{form.category|add_class:'form-control'}}
+
+                <label for="{{ form.derivery.id_for_label }}"
+                  >{{ form.derivery.label }}</label
+                >
+                {{form.derivery|add_class:'form-control'}}
+
+                <label for="{{ form.response.id_for_label }}"
+                  >{{ form.response.label }}</label
+                >
+                {{form.response|add_class:'form-control'}}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.county.id_for_label }}"
+                  >{{ form.county.label }}</label
+                >
+                {{form.county|add_class:'form-control'}}
+                <label for="{{ form.town.id_for_label }}"
+                  >{{ form.town.label }}</label
+                >
+                {{form.town|add_class:'form-control'}}
+
+                <label for="{{ form.estate.id_for_label }}"
+                  >{{ form.estate.label }}</label
+                >
+                {{form.estate|add_class:'form-control'}}
+                <label for="{{ form.profile_picture.id_for_label }}"
+                  >{{ form.profile_picture.label }}</label
+                >
+                {{form.profile_picture|add_class:'form-control'}}
+
+                <label for="{{ form.bio.id_for_label }}"
+                  >{{ form.bio.label }}</label
+                >
+                {{form.bio|add_class:'form-control'}}
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-lg text-white col-sm-3 mt-4"
+            style="background-color: #206dfb"
+            type="submit"
+          >
+            update Profile
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-sm-3 text-left">
+      <div class="p-4 mb-3 bg-white">
+        <div class="row">
+          <div class="col-sm-4">
+            <img
+              src="{{dealer.profile_picture.url}}"
+              height="100px"
+              width="100px"
+              alt=""
+            />
+          </div>
+          <div class="col-sm-8">
+            <b></b>
+            <div class="ml-1 mt-2"></div>
+          </div>
+        </div>
+        <hr />
+        <h3 class="h5 text-black mb-3">Contact Info</h3>
+        <p class="mb-0 font-weight-bold">Address</p>
+        <p class="mb-4">{{dealer.town}}</p>
+        <p class="mb-0 font-weight-bold">Phone</p>
+        <p class="mb-4">{{dealer.user.phone}}</p>
+
+        <p class="mb-0 font-weight-bold">Email Address</p>
+        <p class="mb-0">{{dealer.user.email}}</p>
+      </div>
+      <div class="p-4 mb-3 bg-white">
+        <h3 class="h5 text-black mb-3">More Info</h3>
+        <p></p>
+        <p href="#" class="btn btn-primary py-2 px-4">Learn More</p>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
