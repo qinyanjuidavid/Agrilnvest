@@ -338,7 +338,7 @@ class Farmer(Profile):
         choices=ResponseTimeChoices.choices,
         default=ResponseTimeChoices.TWO_HOURS,
     )
-    interest = models.ForeignKey(
+    specialization = models.ForeignKey(
         FarmProductCategory,
         related_name="categories",
         on_delete=models.CASCADE,

@@ -48,14 +48,17 @@ THIRD_PARTY_APPS = [
     "crispy_forms",
     "corsheaders",
     "django_extensions",
+    "django_filters",
     "drf_spectacular",
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "widget_tweaks",
 ]
 
 LOCAL_APPS = [
     "modules.accounts",
+    "modules.inventory",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
