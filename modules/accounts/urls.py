@@ -56,4 +56,6 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
+    path("farmer/profile/", views.FarmerProfileView, name="farmerProfile"),
+    path("customer/profile/", views.CustomerProfileView, name="customerProfile"),
 ]
