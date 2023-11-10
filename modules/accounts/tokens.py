@@ -13,7 +13,7 @@
 
 # account_activation_token = TokenGenerator()
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils import six
+import six
 from django.utils import timezone
 
 

@@ -4,7 +4,7 @@ from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 from django import forms
 
-from modules.accounts.models import FarmProductCategory, RoleChoices, Farmer
+from modules.accounts.models import Customer, FarmProductCategory, RoleChoices, Farmer
 
 User = get_user_model()
 
@@ -45,37 +45,6 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
                 "unique": _("This email has already been taken."),
             },
         }
-
-
-# class UserSignupForm(forms.ModelForm):
-#     email = forms.EmailField(max_length=156, required=True)
-#     phone = forms.CharField(max_length=20, required=True)
-#     password = forms.CharField(label="Password", widget=forms.PasswordInput)
-#     password_confirmation = forms.CharField(
-#         label="Password Confirmation", widget=forms.PasswordInput
-#     )
-
-#     class Meta:
-#         model = User
-#         fields = ("name", "phone", "email")
-
-#     def clean_password(self):
-#         password = self.cleaned_data.get("password")
-#         password_confirmation = self.cleaned_data.get("password_confirmation")
-
-#         if password and password_confirmation and password != password_confirmation:
-#             raise forms.ValidationError("Password don't match!")
-
-#         return password
-
-#     @transaction.atomic
-#     def save(self, commit=True):
-#         user = super().save(commit=False)
-#         user.is_active = True
-#         user.set_password(self.cleaned_data["password"])
-#         if commit:
-#             user.save()
-#         return user
 
 
 class UserSignupForm(forms.ModelForm):
@@ -132,12 +101,14 @@ class UserSignupForm(forms.ModelForm):
         """
         user = super().save(commit=False)
         user.is_active = True
+        user.role = RoleChoices.CUSTOMER
         user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()
         return user
 
-class FarmersSignupForm(forms.ModelForm):
+
+class FarmerSignupForm(forms.ModelForm):
     """
     A form for farmer registration/signup.
     """
@@ -206,3 +177,63 @@ class FarmersSignupForm(forms.ModelForm):
         farmer.save()
 
         return user
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("name", "phone_no")
+
+
+class FarmerProfileUpdateForm(forms.ModelForm):
+    bio = forms.CharField(
+        label="Bio",
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Briefly describe yourself",
+                "rows": "4",
+                "cols": "25",
+            },
+        ),
+    )
+
+    class Meta:
+        model = Farmer
+        fields = (
+            "specialization",
+            "protect_email",
+            "profile_image",
+            "bio",
+            "gender",
+            "county",
+            "town",
+            "estate",
+            "date_of_birth",
+        )
+
+
+class CustomerProfileUpdateForm(forms.ModelForm):
+    bio = forms.CharField(
+        label="Bio",
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Briefly describe yourself",
+                "rows": "4",
+                "cols": "25",
+            },
+        ),
+    )
+
+    class Meta:
+        model = Customer
+        fields = (
+            "bio",
+            "gender",
+            "profile_image",
+            "county",
+            "town",
+            "estate",
+            "date_of_birth",
+        )

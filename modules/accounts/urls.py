@@ -1,6 +1,9 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
+from modules.accounts.views import CustomerSignupView, FarmerSignupView
+from modules.accounts import views
+
 app_name = "accounts"
 
 urlpatterns = [
@@ -18,7 +21,9 @@ urlpatterns = [
         ),
         name="logout",
     ),
-    # path("activate/<uidb64>/<token>/", views.activate, name="activate"),
+    path("farmer/signup/", FarmerSignupView.as_view(), name="farmerSignup"),
+    path("signup/", CustomerSignupView.as_view(), name="customerSignup"),
+    path("activate/<uidb64>/<token>/", views.activate, name="activate"),
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(
