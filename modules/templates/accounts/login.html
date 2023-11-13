@@ -16,8 +16,10 @@
             Enter your login details to continue.
           </p>
           <hr />
+
           <form action="#" method="post" class="text-left">
             {%csrf_token%}
+            
             <!---->
             {% for field in form.visible_fields %}
             <div class="form-group">

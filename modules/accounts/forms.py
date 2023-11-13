@@ -156,27 +156,50 @@ class FarmerSignupForm(forms.ModelForm):
 
     @transaction.atomic
     def save(self, commit=True):
-        """
-        Save method to create and save a new user instance and associated farmer.
-
-        Args:
-            commit (bool): If True, save the user instance to the database.
-
-        Returns:
-            User: The created user instance.
-        """
         user = super().save(commit=False)
         user.is_active = True
         user.role = RoleChoices.FARMER
         user.set_password(self.cleaned_data["password"])
+
+        # Save the user before creating or getting the associated Farmer
         if commit:
             user.save()
+            # Ensure user is saved before getting or creating Farmer
+            farmer, created = Farmer.objects.get_or_create(user=user)
 
-        farmer, created = Farmer.objects.get_or_create(user=user)
-        farmer.specialization = self.cleaned_data.get("specialization")
-        farmer.save()
+            if not created:
+                # If Farmer already exists, update the specialization
+                farmer.specialization = self.cleaned_data.get("specialization")
+                farmer.save()
+            else:
+                # If Farmer is created, explicitly save it
+                farmer.save()
 
         return user
+
+    # @transaction.atomic
+    # def save(self, commit=True):
+    #     """
+    #     Save method to create and save a new user instance and associated farmer.
+
+    #     Args:
+    #         commit (bool): If True, save the user instance to the database.
+
+    #     Returns:
+    #         User: The created user instance.
+    #     """
+    #     user = super().save(commit=False)
+    #     user.is_active = True
+    #     user.role = RoleChoices.FARMER
+    #     user.set_password(self.cleaned_data["password"])
+    #     if commit:
+    #         user.save()
+
+    #     farmer, created = Farmer.objects.get_or_create(user=user)
+    #     farmer.specialization = self.cleaned_data.get("specialization")
+    #     farmer.save()
+
+    #     return user
 
 
 class UserUpdateForm(forms.ModelForm):

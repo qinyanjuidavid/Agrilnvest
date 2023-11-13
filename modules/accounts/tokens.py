@@ -68,7 +68,6 @@ class TokenGenerator(PasswordResetTokenGenerator):
         """
         # Generate a token and set the created_at timestamp
         token = self._make_hash_value(user)
-        token.created_at = timezone.now()
         return token
 
 

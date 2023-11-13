@@ -21,19 +21,48 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 class FarmerSignupView(CreateView):
+    """
+    View for farmer registration/signup.
+
+    Attributes:
+        model (User): The User model to be used for registration.
+        form_class (FarmerSignupForm): The form class for farmer registration.
+        template_name (str): The HTML template to render for the registration page.
+    """
+
     model = User
     form_class = FarmerSignupForm
     template_name = "accounts/farmerSignup.html"
 
     def get_context_data(self, **kwargs):
+        """
+        Get additional context data to be passed to the template.
+
+        Args:
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            dict: The context data.
+        """
         kwargs["user_type"] = RoleChoices.FARMER
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
-            send_activation_mail(user, self.request)
+        """
+        Handle a valid form submission.
+
+        Save the user, send an activation email, and render a success template.
+
+        Args:
+            form (FarmerSignupForm): The form instance.
+
+        Returns:
+            HttpResponse: The response object rendering the success template.
+        """
+        user = form.save(commit=False)
+        user.save()
+        # send_activation_mail(user, self.request)
+
         return render(self.request, "accounts/sign_alert.html")
 
 
@@ -50,7 +79,7 @@ class CustomerSignupView(CreateView):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            send_activation_mail(user, self.request)
+            # send_activation_mail(user, self.request)
         return render(self.request, "accounts/sign_alert.html")
 
 

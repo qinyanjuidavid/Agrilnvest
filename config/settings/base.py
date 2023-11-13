@@ -42,6 +42,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
 ]
 
 THIRD_PARTY_APPS = [
@@ -191,6 +192,15 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
+
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_HOST = env("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="davidkinyanjui052@gmail.com@gmail.com")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="vazkrylvzmdururr")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_PORT = env("EMAIL_PORT", default=587)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False) 
+
 
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
